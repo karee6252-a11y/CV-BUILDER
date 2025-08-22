@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional CV Builder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="light" dir="ltr">
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">CV</div>
+                <span data-lang="en">Professional CV Builder</span>
+                <span data-lang="ar" style="display: none;">منشئ السيرة الذاتية المحترف</span>
+            </div>
+            <div class="controls">
+                <div class="language-switch">
+                    <span data-lang="en">EN</span>
+                    <label class="switch">
+                        <input type="checkbox" id="languageToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span data-lang="ar">AR</span>
+                </div>
+                <button class="btn" id="themeToggle">
+                    <span data-lang="en">🌙 Dark Mode</span>
+                    <span data-lang="ar" style="display: none;">🌙 الوضع الداكن</span>
+                </button>
+                <button class="btn btn-success" id="exportJSON">
+                    <span data-lang="en">💾 Save JSON</span>
+                    <span data-lang="ar" style="display: none;">💾 حفظ JSON</span>
+                </button>
+                <label for="importJSON" class="file-label">
+                    <span data-lang="en">📂 Import JSON</span>
+                    <span data-lang="ar" style="display: none;">📂 استيراد JSON</span>
+                </label>
+                <input type="file" id="importJSON" accept=".json" class="file-input">
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="form-section">
+                <div class="form-header">
+                    <h2 class="section-title" data-lang="en">CV Information</h2>
+                    <h2 class="section-title" data-lang="ar" style="display: none;">معلومات السيرة الذاتية</h2>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active" data-tab="personal">Personal</div>
+                    <div class="tab" data-tab="education">Education</div>
+                    <div class="tab" data-tab="experience">Experience</div>
+                    <div class="tab" data-tab="skills">Skills</div>
+                    <div class="tab" data-tab="projects">Projects</div>
+                </div>
+
+                <div class="tab-content active" id="personalTab">
+                    <div class="form-group">
+                        <label class="form-label" data-lang="en">Full Name *</label>
+                        <label class="form-label" data-lang="ar" style="display: none;">الاسم الكامل *</label>
+                        <input type="text" class="form-input" id="fullName" placeholder="John Doe" data-lang="en">
+                        <input type="text" class="form-input" id="fullNameAr" placeholder="محمد أحمد" data-lang="ar" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-lang="en">Professional Title</label>
+                        <label class="form-label" data-lang="ar" style="display: none;">المسمى الوظيفي</label>
+                        <input type="text" class="form-input" id="professionalTitle" placeholder="Software Engineer" data-lang="en">
+                        <input type="text" class="form-input" id="professionalTitleAr" placeholder="مهندس برمجيات" data-lang="ar" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-lang="en">Email *</label>
+                        <label class="form-label" data-lang="ar" style="display: none;">البريد الإلكتروني *</label>
+                        <input type="email" class="form-input" id="email" placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-lang="en">Phone</label>
+                        <label class="form-label" data-lang="ar" style="display: none;">الهاتف</label>
+                        <input type="tel" class="form-input" id="phone" placeholder="+1234567890">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-lang="en">LinkedIn</label>
+                        <label class="form-label" data-lang="ar" style="display: none;">لينكدإن</label>
+                        <input type="url" class="form-input" id="linkedin" placeholder="https://linkedin.com/in/johndoe">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-lang="en">Address</label>
+                        <label class="form-label" data-lang="ar" style="display: none;">العنوان</label>
+                        <input type="text" class="form-input" id="address" placeholder="City, Country" data-lang="en">
+                        <input type="text" class="form-input" id="addressAr" placeholder="المدينة، الدولة" data-lang="ar" style="display: none;">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-lang="en">Summary</label>
+                        <label class="form-label" data-lang="ar" style="display: none;">ملخص</label>
+                        <textarea class="form-textarea" id="summary" placeholder="Brief professional summary..." data-lang="en"></textarea>
+                        <textarea class="form-textarea" id="summaryAr" placeholder="ملخص مهني موجز..." data-lang="ar" style="display: none;"></textarea>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="educationTab">
+                    <div class="dynamic-list" id="educationList"></div>
+                    <button class="add-btn" id="addEducation">
+                        <span data-lang="en">+ Add Education</span>
+                        <span data-lang="ar" style="display: none;">+ إضافة تعليم</span>
+                    </button>
+                </div>
+
+                <div class="tab-content" id="experienceTab">
+                    <div class="dynamic-list" id="experienceList"></div>
+                    <button class="add-btn" id="addExperience">
+                        <span data-lang="en">+ Add Experience</span>
+                        <span data-lang="ar" style="display: none;">+ إضافة خبرة</span>
+                    </button>
+                </div>
+
+                <div class="tab-content" id="skillsTab">
+                    <div class="form-group">
+                        <label class="form-label" data-lang="en">Skills (comma separated)</label>
+                        <label class="form-label" data-lang="ar" style="display: none;">المهارات (مفصولة بفواصل)</label>
+                        <textarea class="form-textarea" id="skills" placeholder="JavaScript, React, Node.js, Python" data-lang="en"></textarea>
+                        <textarea class="form-textarea" id="skillsAr" placeholder="جافا سكريبت، رياكت، نود.جي إس، بايثون" data-lang="ar" style="display: none;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-lang="en">Languages</label>
+                        <label class="form-label" data-lang="ar" style="display: none;">اللغات</label>
+                        <textarea class="form-textarea" id="languages" placeholder="English (Fluent), Arabic (Native)" data-lang="en"></textarea>
+                        <textarea class="form-textarea" id="languagesAr" placeholder="الإنجليزية (متقن)، العربية (أم)" data-lang="ar" style="display: none;"></textarea>
+                    </div>
+                </div>
+
+                <div class="tab-content" id="projectsTab">
+                    <div class="dynamic-list" id="projectsList"></div>
+                    <button class="add-btn" id="addProject">
+                        <span data-lang="en">+ Add Project</span>
+                        <span data-lang="ar" style="display: none;">+ إضافة مشروع</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-section">
+                <div class="preview-header">
+                    <h2 class="section-title" data-lang="en">Live Preview</h2>
+                    <h2 class="section-title" data-lang="ar" style="display: none;">معاينة مباشرة</h2>
+                    <div class="template-selector">
+                        <select class="form-select" id="templateSelect">
+                            <option value="default" data-lang="en">Default Template</option>
+                            <option value="default" data-lang="ar" style="display: none;">قالب افتراضي</option>
+                            <option value="modern" data-lang="en">Modern Template</option>
+                            <option value="modern" data-lang="ar" style="display: none;">قالب عصري</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="cv-preview">
+                    <div id="cvContent" class="cv-template default-template">
+                        <!-- CV content will be generated here -->
+                    </div>
+                </div>
+                <div class="export-options">
+                    <button class="btn btn-success" id="exportPDF">
+                        <span data-lang="en">📄 Export PDF</span>
+                        <span data-lang="ar" style="display: none;">📄 تصدير PDF</span>
+                    </button>
+                    <button class="btn btn-warning" id="exportImage">
+                        <span data-lang="en">🖼️ Export Image</span>
+                        <span data-lang="ar" style="display: none;">🖼️ تصدير صورة</span>
+                    </button>
+                    <button class="btn btn-danger" id="printCV">
+                        <span data-lang="en">🖨️ Print</span>
+                        <span data-lang="ar" style="display: none;">🖨️ طباعة</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <span id="notificationMessage"></span>
+    </div>
+
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
